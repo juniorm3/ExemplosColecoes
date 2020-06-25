@@ -1,8 +1,6 @@
 package br.com.inovation.comparator;
 
-import java.time.LocalDate;
-
-public class Aluno {
+public class Aluno implements Comparable<Aluno> {
 
     private Integer codigo;
     private String nome;
@@ -61,9 +59,14 @@ public class Aluno {
     @Override
     public String toString() {
         return "Aluno{" +
-                ", nome='" + nome + '\'' +
+                "nome='" + nome + '\'' +
                 ", idade=" + idade +
                 ", anoNascimento=" + anoNascimento +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Aluno o) {
+        return this.getAnoNascimento() - o.getAnoNascimento();
     }
 }

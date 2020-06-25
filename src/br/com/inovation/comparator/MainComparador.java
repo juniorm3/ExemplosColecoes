@@ -1,7 +1,8 @@
 package br.com.inovation.comparator;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainComparador {
@@ -10,7 +11,32 @@ public class MainComparador {
         List<Aluno> alunos = new ArrayList<>();
         preenCherAlunos(alunos);
 
+        System.out.println("<<< Ordem de inserção >>>");
         System.out.println(alunos);
+
+        alunos.sort(Comparator.comparingInt(Aluno::getIdade).reversed());
+
+
+        alunos.sort((first, second) -> first.getAnoNascimento() - second.getAnoNascimento());
+        System.out.println("<<< Ordem natural dos anos >>>");
+        System.out.println(alunos);
+
+        alunos.sort((first, second) -> second.getAnoNascimento() - first.getAnoNascimento());
+        System.out.println("<<< Ordem inversa dos anos >>>");
+        System.out.println(alunos);
+
+        alunos.sort(Aluno::compareTo);
+        System.out.println("<<< Ordem Natural dos anos >>>");
+        System.out.println(alunos);
+
+        Collections.sort(alunos);
+        System.out.println("<<< Usando interfasse comparable >>>");
+        System.out.println(alunos);
+
+        Collections.sort(alunos, new AlunoOrdemInversa());
+        System.out.println("<<< Usando classe que implemta comparator >>>");
+        System.out.println(alunos);
+
     }
 
     private static void preenCherAlunos(List<Aluno> alunos) {
